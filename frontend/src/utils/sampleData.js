@@ -1,0 +1,45 @@
+export const sampleCampaigns = [
+  {
+    id: 'sample-1',
+    name: 'Emergency liver surgery for Jasmir',
+    healthCondition: 'Surgical emergency',
+    medicalFacility: 'Lagos University Teaching Hospital',
+    description:
+      'Jasmir needs urgent specialist care and post-surgery support. The family has verified documentation and is seeking help to close the funding gap.',
+    raisedAmount: 6800000,
+    targetAmount: 10000000,
+    donorCount: 218,
+    targetDate: '2026-07-10',
+    status: 'Active',
+    initials: 'JS',
+    contractAddress: '0x0000000000000000000000000000000000000000',
+  },
+  {
+    id: 'sample-2',
+    name: 'Maternal emergency care for Amina',
+    healthCondition: 'Maternal health emergency',
+    medicalFacility: 'National Hospital Abuja',
+    description:
+      'Amina requires monitored care, medication, and safe delivery support after complications in her third trimester.',
+    raisedAmount: 2450000,
+    targetAmount: 5500000,
+    donorCount: 96,
+    targetDate: '2026-06-22',
+    status: 'Active',
+    initials: 'AO',
+  },
+  {
+    id: 'sample-3',
+    name: 'Dialysis support for Chidera',
+    healthCondition: 'Kidney disease',
+    medicalFacility: 'Federal Medical Centre',
+    description:
+      'Chidera is receiving dialysis while the family prepares for longer-term kidney care and recovery expenses.',
+    raisedAmount: 3900000,
+    targetAmount: 8000000,
+    donorCount: 141,
+    targetDate: '2026-08-01',
+    status: 'Active',
+    initials: 'CH',
+  },
+]

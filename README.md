@@ -1,17 +1,49 @@
-<<<<<<< HEAD
 # BeHEALTH
-A crowdfunding platform for women and children with health and medical challenges
-=======
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BeHEALTH is a crowdfunding platform for women and children facing health and medical challenges. It combines traditional account-based campaign workflows with Paystack fiat donations and smart-contract-backed crypto donations.
 
-Currently, two official plugins are available:
+## Workspace Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```text
+behealth/
+├── frontend/   React 19 + Vite 6 + Tailwind CSS 4
+├── backend/    Node.js + Express + Prisma REST API
+├── contracts/  Hardhat + Solidity campaign escrow contracts
+└── README.md
+```
 
-## Expanding the ESLint configuration
+## Development
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> initial changes
+Install dependencies from the repository root after configuring each workspace:
+
+```bash
+npm install
+```
+
+Run the frontend:
+
+```bash
+npm run dev
+```
+
+Run the backend:
+
+```bash
+npm run backend:dev
+```
+
+Run contract tests:
+
+```bash
+npm run contracts:test
+```
+
+## Product Roles
+
+- **Donor**: funds active campaigns through Paystack or supported crypto chains.
+- **Campaigner**: creates, saves, submits, and manages medical fundraising campaigns.
+- **Admin**: reviews private campaign details before campaigns become public.
+
+## Privacy Rule
+
+Public campaign responses must never expose doctor contacts, patient family contacts, bank details, or private financial details. These fields are only available to campaign owners and admins.

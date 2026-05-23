@@ -1,0 +1,18 @@
+export const healthConditions = [
+  'Cancer',
+  'Kidney disease',
+  'Heart disease',
+  'Stroke',
+  'Diabetes complications',
+  'Sickle cell disease',
+  'HIV/AIDS',
+  'Tuberculosis',
+  'Malaria complications',
+  'Maternal health emergency',
+  'Neonatal condition',
+  'Surgical emergency',
+  'Mental health crisis',
+  'Accident/trauma',
+  'Rare disease',
+  'Other',
+]

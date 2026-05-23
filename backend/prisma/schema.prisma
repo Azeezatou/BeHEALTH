@@ -1,0 +1,133 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String     @id @default(uuid())
+  email                String     @unique
+  passwordHash         String
+  role                 Role       @default(DONOR)
+  isEmailVerified      Boolean    @default(false)
+  emailVerifyToken     String?
+  resetPasswordToken   String?
+  resetPasswordExpires DateTime?
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
+  profile              Profile?
+  campaigns            Campaign[]
+  donations            Donation[]
+}
+
+model Profile {
+  id            String  @id @default(uuid())
+  userId        String  @unique
+  user          User    @relation(fields: [userId], references: [id])
+  fullName      String?
+  phone         String?
+  country       String?
+  avatarUrl     String?
+  walletAddress String?
+}
+
+model Campaign {
+  id                    String           @id @default(uuid())
+  campaignerId          String
+  campaigner            User             @relation(fields: [campaignerId], references: [id])
+  name                  String
+  description           String
+  healthCondition       String
+  healthConditionOther  String?
+  targetAmount          Decimal
+  targetDate            DateTime?
+  medicalFacility       String
+  hospitalWard          String?
+  doctorName            String
+  doctorPhone           String
+  doctorEmail           String?
+  patientFamilyName     String
+  patientFamilyPhone    String
+  patientFamilyRelation String?
+  bankName              String?
+  accountNumber         String?
+  accountName           String?
+  walletAddress         String?
+  status                CampaignStatus   @default(DRAFT)
+  adminNotes            String?
+  reviewedBy            String?
+  reviewedAt            DateTime?
+  contractAddress       String?
+  raisedAmount          Decimal          @default(0)
+  donorCount            Int              @default(0)
+  mediaFiles            MediaFile[]
+  donations             Donation[]
+  updates               CampaignUpdate[]
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+}
+
+model MediaFile {
+  id         String   @id @default(uuid())
+  campaignId String
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+  url        String
+  type       String
+  label      String?
+  createdAt  DateTime @default(now())
+}
+
+model Donation {
+  id          String         @id @default(uuid())
+  donorId     String?
+  donor       User?          @relation(fields: [donorId], references: [id])
+  campaignId  String
+  campaign    Campaign       @relation(fields: [campaignId], references: [id])
+  amount      Decimal
+  currency    String         @default("NGN")
+  channel     DonationChannel
+  paystackRef String?
+  txHash      String?
+  chain       String?
+  status      DonationStatus @default(PENDING)
+  createdAt   DateTime       @default(now())
+}
+
+model CampaignUpdate {
+  id         String   @id @default(uuid())
+  campaignId String
+  campaign   Campaign @relation(fields: [campaignId], references: [id])
+  content    String
+  createdAt  DateTime @default(now())
+}
+
+enum Role {
+  DONOR
+  CAMPAIGNER
+  ADMIN
+}
+
+enum CampaignStatus {
+  DRAFT
+  SUBMITTED
+  PENDING_REVIEW
+  ACTIVE
+  REJECTED
+  FUNDED
+  CLOSED
+}
+
+enum DonationChannel {
+  FIAT_PAYSTACK
+  CRYPTO_ONCHAIN
+}
+
+enum DonationStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+  REFUNDED
+}
